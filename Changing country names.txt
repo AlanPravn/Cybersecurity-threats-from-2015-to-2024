@@ -23,3 +23,7 @@ if 'Country' in df.columns:
     print(df[['Country', 'Country_Name']].head())
 else:
     print("\n'Country' column not found in the DataFrame.")
+
+# Displaying a preview of the cleaned data
+print("\nCleaned Data Preview:")
+print(df.head())
