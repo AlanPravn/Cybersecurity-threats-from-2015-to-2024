@@ -1,0 +1,19 @@
+# Preprocessing (Data Cleaning)
+
+# For numerical columns:
+for col in df.select_dtypes(include=np.number).columns:
+  if df[col].isnull().any():
+    df[col].fillna(df[col].mean(), inplace=True)
+
+# For categorical columns (example: fill NaNs with the mode of the column)
+for col in df.select_dtypes(include='object').columns:
+  if df[col].isnull().any():
+    df[col].fillna(df[col].mode()[0], inplace=True)
+
+# Remove duplicate rows
+df.drop_duplicates(inplace=True)
+
+
+# Display info after cleaning
+print("\nData Info After Cleaning:")
+df.info()
