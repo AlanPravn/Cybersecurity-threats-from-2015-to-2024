@@ -1,0 +1,27 @@
+# Average Loss per User by Attack Type (Bar Plot)
+# This plot shows the average financial impact of different types of attacks.
+if 'Attack Type' in df.columns and 'Loss per User (£)' in df.columns:
+    plt.figure(figsize=(12, 7))
+    sns.barplot(data=df, x='Attack Type', y='Loss per User (£)', estimator=np.mean)
+    plt.title('Average Loss per User by Attack Type')
+    plt.xlabel('Attack Type')
+    plt.ylabel('Average Loss per User (£)')
+    plt.xticks(rotation=45, ha='right') # Rotate x-axis labels for readability
+    plt.tight_layout() # Adjust layout to prevent labels overlapping
+    plt.show()
+else:
+    print("Required columns 'Attack Type' and 'Loss per User (£)' not found for 'Average Loss per User by Attack Type' plot.")
+
+# Average GDP per Capita by Country (Bar Plot)
+# This plot shows the average GDP per capita for each country in the dataset.
+if 'Country Name' in df.columns and 'GDP per Capita (£)' in df.columns:
+    plt.figure(figsize=(12, 7))
+    sns.barplot(data=df, x='Country Name', y='GDP per Capita (£)', estimator=np.mean)
+    plt.title('Average GDP per Capita by Country')
+    plt.xlabel('Country')
+    plt.ylabel('Average GDP per Capita (£)')
+    plt.xticks(rotation=45, ha='right') # Rotate x-axis labels for readability
+    plt.tight_layout()
+    plt.show()
+else:
+    print("Required columns 'Country Name' and 'GDP per Capita (£)' not found for 'Average GDP per Capita by Country' plot.")
