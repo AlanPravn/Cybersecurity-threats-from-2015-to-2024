@@ -1,0 +1,12 @@
+#Count of Attack Types by Country (Grouped Bar Plot)
+# This plot shows how the distribution of attack types varies across different countries.
+if 'Country Name' in df.columns and 'Attack Type' in df.columns:
+    plt.figure(figsize=(15, 8))
+    sns.countplot(data=df, y='Country Name', hue='Attack Type', order = df['Country Name'].value_counts().index)
+    plt.title('Count of Attack Types by Country')
+    plt.xlabel('Count')
+    plt.ylabel('Country')
+    plt.legend(title='Attack Type')
+    plt.show()
+else:
+    print("Required columns 'Country Name' and 'Attack Type' not found for 'Count of Attack Types by Country' plot.")
