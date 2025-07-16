@@ -1,0 +1,31 @@
+# Distribution of numerical features.
+
+if len(df.select_dtypes(include=np.number).columns) > 0:
+    numerical_col = df.select_dtypes(include=np.number).columns[0]
+    plt.figure(figsize=(10, 6))
+    sns.histplot(data=df, x=numerical_col, kde=True)
+    plt.title(f'Distribution of {numerical_col}')
+    plt.xlabel(numerical_col)
+    plt.ylabel('Frequency')
+    plt.show()
+
+
+
+
+# Visualizing the frequency of categories in categorical features
+if len(df.select_dtypes(include='object').columns) > 0:
+    categorical_col = df.select_dtypes(include='object').columns[0]
+    plt.figure(figsize=(12, 6))
+    sns.countplot(data=df, y=categorical_col, order = df[categorical_col].value_counts().index)
+    plt.title(f'Count of {categorical_col}')
+    plt.xlabel('Count')
+    plt.ylabel(categorical_col)
+    plt.show()
+
+
+# Correlation Heatmap: Visualizing the correlation matrix between numerical features.
+if len(df.select_dtypes(include=np.number).columns) > 1:
+    plt.figure(figsize=(14, 8))
+    sns.heatmap(df.select_dtypes(include=np.number).corr(), annot=True, cmap='coolwarm', fmt=".2f")
+    plt.title('Correlation Heatmap of Numerical Features')
+    plt.show()
