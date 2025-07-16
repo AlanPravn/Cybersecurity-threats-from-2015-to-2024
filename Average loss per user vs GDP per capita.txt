@@ -1,0 +1,20 @@
+# Average Loss per User vs. GDP per Capita by Country
+# Relationship between economic indicators (GDP per capita) and the financial impact of attacks (Loss per User)
+# across different countries.
+if 'Country Name' in df.columns and 'Loss per User (£)' in df.columns and 'GDP per Capita (£)' in df.columns:
+    # Calculate average 'Loss per User (£)' and 'GDP per Capita (£)' for each country
+    country_agg = df.groupby('Country Name').agg({
+        'Loss per User (£)': 'mean',
+        'GDP per Capita (£)': 'mean'
+    }).reset_index()
+
+    plt.figure(figsize=(12, 8))
+    sns.scatterplot(data=country_agg, x='GDP per Capita (£)', y='Loss per User (£)', hue='Country Name', s=100) # s controls marker size
+    plt.title('Average Loss per User vs. GDP per Capita by Country')
+    plt.xlabel('Average GDP per Capita (£)')
+    plt.ylabel('Average Loss per User (£)')
+    plt.legend(title='Country', bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.grid(True)
+    plt.show()
+else:
+     print("Required columns 'Country Name', 'Loss per User (£)', and 'GDP per Capita (£)' not found for 'Average Loss per User vs. GDP per Capita' plot.")
