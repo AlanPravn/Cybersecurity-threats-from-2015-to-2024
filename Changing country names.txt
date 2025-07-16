@@ -1,0 +1,25 @@
+ # Changing country as number to country names
+# Map numerical country codes to country names
+country_mapping = {
+    1: 'USA',
+    2: 'Canada',
+    3: 'Mexico',
+    4: 'UK',
+    5: 'Germany',
+    6: 'France',
+    7: 'China',
+    8: 'India',
+    9: 'Japan',
+    10: 'Australia',
+    # Adding more mappings as needed based on your dataset
+}
+
+# Applying the mapping to the 'Country' column (assuming 'Country' is the column name)
+# Replace 'Country' with the actual column name in your DataFrame
+if 'Country' in df.columns:
+    df['Country_Name'] = df['Country'].map(country_mapping)
+    # Display the first few rows to verify the new column
+    print("\nDataFrame with Country Names:")
+    print(df[['Country', 'Country_Name']].head())
+else:
+    print("\n'Country' column not found in the DataFrame.")
