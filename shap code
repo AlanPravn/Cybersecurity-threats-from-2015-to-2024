@@ -1,0 +1,23 @@
+# Get the trained model from the pipeline
+gb_model = gb_pipeline.named_steps['classifier']
+
+# Transform the test data using the same preprocessor
+X_test_transformed = preprocessor.transform(X_test)
+
+# Get feature names from the preprocessor
+feature_names = preprocessor.get_feature_names_out()
+
+# Initialize SHAP explainer for multi-class models
+# Explain predictions for each class
+explainer = shap.Explainer(gb_model.predict_proba, X_test_transformed, feature_names=feature_names)
+
+# Compute SHAP values
+# shap_values is a list of arrays, one for each class
+shap_values = explainer(X_test_transformed)
+
+# Summary plot for the first class (you can change the index to visualize other classes)
+class_index_to_visualize = 0
+class_name_to_visualize = gb_model.classes_[class_index_to_visualize]
+
+print(f"Generating SHAP summary plot for class: {class_name_to_visualize}")
+shap.summary_plot(shap_values[:, :, class_index_to_visualize], X_test_transformed, feature_names=feature_names, class_names=gb_model.classes_)
