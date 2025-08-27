@@ -1,0 +1,71 @@
+#Importing dataset from google drive
+from google.colab import drive
+drive.mount('/content/drive')
+
+def load_data(file_path):
+  file_path = '/content/drive/My Drive/Cyber security dataset GBP.xlsx'
+  df = pd.read_csv(file_path)
+  return df
+
+#Preview the dataset
+
+def load_data(file_path):
+  df = pd.read_excel(file_path)
+  return df
+
+file_path = '/content/drive/My Drive/Cyber security dataset GBP.xlsx'
+df = load_data(file_path)
+
+print("Data Preview:")
+print(df.head())
+
+# Displaying descriptive statistics of the DataFrame
+print("\nData Description:")
+print(df.describe())
+
+#Preprocessing (Data Cleaning)
+
+# For numerical columns:
+for col in df.select_dtypes(include=np.number).columns:
+  if df[col].isnull().any():
+    df[col].fillna(df[col].mean(), inplace=True)
+
+# For categorical columns (example: fill NaNs with the mode of the column)
+for col in df.select_dtypes(include='object').columns:
+  if df[col].isnull().any():
+    df[col].fillna(df[col].mode()[0], inplace=True)
+
+# Remove duplicate rows
+df.drop_duplicates(inplace=True)
+
+
+# Display info after cleaning
+print("\nData Info After Cleaning:")
+df.info()
+
+# Changing country as number to country names
+
+# Map numerical country codes to country names
+country_mapping = {
+    1: 'USA',
+    2: 'Canada',
+    3: 'Mexico',
+    4: 'UK',
+    5: 'Germany',
+    6: 'France',
+    7: 'China',
+    8: 'India',
+    9: 'Japan',
+    10: 'Australia',
+    # Adding more mappings as needed based on your dataset
+}
+
+# Applying the mapping to the 'Country' column (assuming 'Country' is the column name)
+# Replace 'Country' with the actual column name in your DataFrame
+if 'Country' in df.columns:
+    df['Country_Name'] = df['Country'].map(country_mapping)
+    # Display the first few rows to verify the new column
+    print("\nDataFrame with Country Names:")
+    print(df[['Country', 'Country_Name']].head())
+else:
+    print("\n'Country' column not found in the DataFrame.")
